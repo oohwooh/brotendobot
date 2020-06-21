@@ -1,1 +1,1 @@
-google_images_download
+Pillow
