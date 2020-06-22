@@ -10,10 +10,12 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 def query(update, context):
     q = update.inline_query.query
     id = update.inline_query.id
+    res = 'https://e3a4a858e59f.ngrok.io/?caption='+q
     results = [
         InlineQueryResultPhoto(
             id=uuid4(),
-            photo_url='https://e3a4a858e59f.ngrok.io/?caption='+q)  # Update to actual url once noah fixes the stupid firewall
+            thumb_url=res,
+            photo_url=res)  # Update to actual url once noah fixes the stupid firewall
     ]
     os.remove(f'{id}.png')
     context.bot.answer_inline_query(update.inline_query.id, results)
