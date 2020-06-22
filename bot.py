@@ -1,5 +1,6 @@
 import os
 from uuid import uuid4
+import urllib
 from telegram import InlineQueryResultPhoto
 from telegram.ext import Updater, InlineQueryHandler
 import logging
@@ -9,13 +10,12 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 def query(update, context):
     q = update.inline_query.query
-    id = update.inline_query.id
-    res = 'https://e3a4a858e59f.ngrok.io/?caption='+q
+    output = urllib.parse.quote('https://e3a4a858e59f.ngrok.io/?caption='+q)
     results = [
         InlineQueryResultPhoto(
             id=uuid4(),
-            thumb_url=res,
-            photo_url=res)  # Update to actual url once noah fixes the stupid firewall
+            thumb_url=output,
+            photo_url=output)  # Update to actual url once noah fixes the stupid firewall
     ]
     context.bot.answer_inline_query(update.inline_query.id, results)
 
