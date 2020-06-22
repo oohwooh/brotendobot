@@ -37,12 +37,12 @@ def add_caption(im, caption, top):
                   font=fnt)
 
 
-def make_brotendo(TOP_TEXT):
+def make_brotendo(TOP_TEXT, file="temp"):
     BOTTOM_TEXT = "brotendo"
     im = Image.open(random.choice(erics))
     add_caption(im, TOP_TEXT, True)
     add_caption(im, BOTTOM_TEXT, False)
-    im.save("hello.png", "PNG")
+    im.save(file+".png", "PNG")
 
 
 make_brotendo("give me a different eric pls")
