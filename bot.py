@@ -11,6 +11,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 def query(update, context):
     q = update.inline_query.query
+    if len(q) == 0:
+        return
     print(q)
     output = 'https://e3a4a858e59f.ngrok.io/'+urllib.parse.quote(q) +'.jpg'  # Update to actual url once noah fixes the stupid firewall
     img = imgspy.info(output)
