@@ -17,7 +17,6 @@ def query(update, context):
             thumb_url=res,
             photo_url=res)  # Update to actual url once noah fixes the stupid firewall
     ]
-    os.remove(f'{id}.png')
     context.bot.answer_inline_query(update.inline_query.id, results)
 
 updater = Updater(os.getenv('BOT_TOKEN'), use_context=True)
