@@ -26,7 +26,7 @@ def query(update, context):
             photo_height=img['height']
         )
     )
-    context.bot.answer_inline_query(update.inline_query.id, results)
+    context.bot.answer_inline_query(update.inline_query.id, results, cache_time=15)
 
 
 updater = Updater(os.getenv('BOT_TOKEN'), use_context=True)
