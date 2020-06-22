@@ -2,7 +2,6 @@ import os
 from uuid import uuid4
 from telegram import InlineQueryResultPhoto
 from telegram.ext import Updater, InlineQueryHandler
-from make_brotendo import make_brotendo
 import logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
