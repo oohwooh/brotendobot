@@ -51,7 +51,7 @@ def serve_pil_image(pil_img):
 @app.route('/<path:path>')
 def make_brotendo(path):
     im = Image.open(random.choice(erics))
-    add_caption(im, path, True)
+    add_caption(im, os.path.splittext(path)[0], True)
     add_caption(im, "brotendo", False)
     return serve_pil_image(im)
 
