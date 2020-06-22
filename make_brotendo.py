@@ -48,10 +48,10 @@ def serve_pil_image(pil_img):
     return send_file(img_io, mimetype='image/jpeg')
 
 
-@app.route('/')
-def make_brotendo():
+@app.route('/<path:path>')
+def make_brotendo(path):
     im = Image.open(random.choice(erics))
-    add_caption(im, request.args.get('caption'), True)
+    add_caption(im, path, True)
     add_caption(im, "brotendo", False)
     return serve_pil_image(im)
 
