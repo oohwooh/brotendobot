@@ -1,5 +1,6 @@
 import os
 import random
+from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 
 erics = ['./eric/' + f for f in os.listdir('./eric')]
@@ -11,6 +12,7 @@ for fdir in os.listdir('./fonts'):
 
 
 def find_fs(font, text, w):
+    print(font)
     w = int(w * 0.5)
     size = 20
     fnt = ImageFont.truetype(font, size)
@@ -28,16 +30,30 @@ def add_caption(im, caption, top):
     draw = ImageDraw.Draw(im)
     w, h = draw.textsize(caption, font=fnt)
     if top:
-        draw.text(((W - w) / 2, (h * 1.2) - h), caption, fill="white", stroke_fill="black", stroke_width=int(W / 200),
+        draw.text(((W - w) / 2, (h * 1) - h), caption, fill="white", stroke_fill="black", stroke_width=int(W / 200),
                   font=fnt)
     else:
         draw.text(((W - w) / 2, (H - h * 1.2)), caption, fill="white", stroke_fill="black", stroke_width=int(W / 200),
                   font=fnt)
 
 
-def make_brotendo(TOP_TEXT, file="temp"):
-    BOTTOM_TEXT = "brotendo"
+from flask import Flask, send_file, request
+
+app = Flask(__name__)
+
+def serve_pil_image(pil_img):
+    img_io = BytesIO()
+    pil_img.save(img_io, 'JPEG', quality=70)
+    img_io.seek(0)
+    return send_file(img_io, mimetype='image/jpeg')
+
+
+@app.route('/')
+def make_brotendo():
     im = Image.open(random.choice(erics))
-    add_caption(im, TOP_TEXT, True)
-    add_caption(im, BOTTOM_TEXT, False)
-    im.save(file+".png", "PNG")
+    add_caption(im, request.args.get('caption'), True)
+    add_caption(im, "brotendo", False)
+    return serve_pil_image(im)
+
+
+app.run(host="0.0.0.0", port=3333)
