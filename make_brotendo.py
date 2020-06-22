@@ -11,9 +11,7 @@ for fdir in os.listdir('./fonts'):
 
 
 def find_fs(font, text, w):
-    print(font)
     w = int(w * 0.5)
-    print(w)
     size = 20
     fnt = ImageFont.truetype(font, size)
     while fnt.getsize(text)[0] < w:
@@ -43,7 +41,3 @@ def make_brotendo(TOP_TEXT, file="temp"):
     add_caption(im, TOP_TEXT, True)
     add_caption(im, BOTTOM_TEXT, False)
     im.save(file+".png", "PNG")
-
-
-make_brotendo("give me a different eric pls")
-
