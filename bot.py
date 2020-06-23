@@ -1,6 +1,5 @@
 import os
-from uuid import uuid4
-import imgspy
+
 import urllib
 from telegram import InlineQueryResultPhoto
 from telegram.ext import Updater, InlineQueryHandler
@@ -15,15 +14,14 @@ def query(update, context):
         return
     print(q)
     output = 'https://e3a4a858e59f.ngrok.io/'+urllib.parse.quote(q) +'.jpg'  # Update to actual url once noah fixes the stupid firewall
-    img = imgspy.info(output)
     results = list()
     results.append(
         InlineQueryResultPhoto(
             id='ranchitup',
             thumb_url=output,
             photo_url=output,
-            photo_width=img['width'],
-            photo_height=img['height']
+            photo_width=1920,
+            photo_height=1080
         )
     )
     context.bot.answer_inline_query(update.inline_query.id, results, cache_time=15)
